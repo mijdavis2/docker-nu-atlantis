@@ -1,0 +1,13 @@
+# Usual suspects
+.env/
+.temp/
+temp/
+.tmp/
+tmp/
+
+# Compiled code
+build/
+dist/
+
+# Pesky mac nonesense
+.DS_Store
