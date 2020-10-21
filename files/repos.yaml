@@ -1,0 +1,8 @@
+workflows:
+  default:
+    plan:
+      steps:
+      - run: /home/atlantis/plan.sh
+    apply:
+      steps:
+      - run: /home/atlantis/apply.sh
