@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> Combines the benefits of atlantis, terragrunt, and tfmask in an opinionated terraform ci/cd docker image with refreshingly clean output.
+<p align="center"> Combines the benefits of atlantis, terragrunt, and tfmask in an opinionated terraform ci/cd docker image with refreshingly clean output and proper GitHub status updates.
     <br>
 </p>
 
