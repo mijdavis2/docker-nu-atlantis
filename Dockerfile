@@ -6,10 +6,9 @@ ci/cd docker image with refreshingly clean output."
 
 RUN apk update && apk upgrade
 
-ENV TERRAGRUNT_VERSION=v0.24.4        \
-    TERRAFORM_VERSION=0.12.29         \
-    CREDSTASH_PROVIDER_VERSION=v0.5.0 \
-    TFMASK_VERSION=0.7.0              \
+ENV TERRAFORM_VERSION=0.12.29  \
+    TERRAGRUNT_VERSION=v0.24.4 \
+    TFMASK_VERSION=0.7.0       \
     INSTALL_DIR=/usr/local/bin
 
 RUN rm -rf ${INSTALL_DIR}/terraform && \
