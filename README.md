@@ -51,7 +51,10 @@ With this docker image and adopting [terragrunt], you get all of the above. Also
 - **[terragrunt]** is a terraform wrapper that helps keep code DRY, maintainable, and safe to automate. See [why use terragrunt].
 - **[atlantis]** is a terraform ci/cd tool that makes automating terraform via good git practices easy. No need for jenkins and you can deploy it anywhere.
 - **[tfmask]** keeps ci/cd of terraform secure by filtering passwords and secrets in terraform output from plans and applies.
-- **[atlantis-mountain]** adds a "simple" bash wrapper to everything above to cleanup the notoriously verbose terragrunt/terraform output while keeping the important stuff and packages it all in an easy to use, opinionated image.
+- **[atlantis-mountain]** custom atlantis image with bash wrappers for everything above and some enhancements:
+  - sets opinionated atlantis config defaults so you don't need atlantis config in your tf repo.
+  - removes the notoriously verbose terragrunt output from the plan.
+  - ensures proper exit code for atlantis to update GitHub build status.
 
 # Getting Started
 
