@@ -11,7 +11,3 @@ Please explain the changes you made here.
 ### Related
 
 If applicable, list related issues, JIRA's, or projects here.
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
