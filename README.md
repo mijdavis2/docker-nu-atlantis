@@ -31,7 +31,7 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
 
 - [About](#about)
   - [The tool stack](#the-tool-stack)
@@ -41,7 +41,6 @@
 - [Compatibility](#compatibility)
 - [Contributing](#contributing)
   - [Developing](#developing)
-    - [Requirements](#requirements-1)
   - [Building](#building)
   - [Testing](#testing)
   - [Publishing](#publishing)
@@ -90,6 +89,8 @@ to ensure the wrappers that provide secure and terse output are compatible.
 # Contributing
 
 Please follow our [contributing guidelines].
+
+Use `make update` to update the CHANGELOG and README toc
 
 ## Developing
 
