@@ -3,7 +3,7 @@ on:
   release:
     types: [published]
 env:
-  IMAGE_NAME: atlantis-mountain
+  IMAGE_NAME: atlantis-found
 jobs:
   test:
     runs-on: ubuntu-latest
