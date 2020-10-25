@@ -11,9 +11,11 @@ build:
 	docker build -t $(IMAGE_ID):$(TAG) ./
 
 publish: build
-	docker push $(IMAGE_ID):$(TAG)
 	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):tf13-$(TAG)
 	docker push $(IMAGE_ID):tf13-$(TAG)
+	docker push $(IMAGE_ID):$(TAG)
+	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):latest
+	docker push $(IMAGE_ID):latest
 
 # For Terraform 0.12
 build-tf12:

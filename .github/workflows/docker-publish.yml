@@ -39,4 +39,3 @@ jobs:
 
           make publish-tf12
           make publish
-          TAG=latest make publish
