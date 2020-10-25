@@ -16,13 +16,13 @@ publish: build
 	docker push $(IMAGE_ID):tf13-$(TAG)
 
 # For Terraform 0.12
-build-12:
+build-tf12:
 	docker build -t $(IMAGE_NAME):tf12-$(TAG) \
 		--build-arg TERRAFORM_VERSION=0.12.29 \
 		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
 		./
 
-publish-12: build-12
+publish-tf12: build-tf12
 	docker push $(IMAGE_ID):tf12-$(TAG)
 
 #########
