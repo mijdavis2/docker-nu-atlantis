@@ -37,6 +37,6 @@ jobs:
 
           echo VERSION=$VERSION
 
+          make publish-tf12
           make publish
           TAG=latest make publish
-          make publish-tf12
