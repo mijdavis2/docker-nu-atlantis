@@ -28,6 +28,6 @@ update-changelog:
 	auto-changelog
 
 update-toc:
-	doctoc --notitle --maxlevel 2 ./README.md
+	doctoc --maxlevel 1 ./README.md
 
 update: update-changelog update-toc

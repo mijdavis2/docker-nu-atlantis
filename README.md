@@ -34,16 +34,9 @@
 
 
 - [About](#about)
-  - [The tool stack](#the-tool-stack)
 - [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Usage](#usage)
 - [Compatibility](#compatibility)
 - [Contributing](#contributing)
-  - [Developing](#developing)
-  - [Building](#building)
-  - [Testing](#testing)
-  - [Publishing](#publishing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
