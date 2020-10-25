@@ -7,15 +7,19 @@
 <h3 align="center">atlantis-found</h3>
 
 <p align="center">
-  
+
+  <a href="https://github.com/taosmountain/docker-atlantis-found/releases" alt="Release">
+    <img src="https://img.shields.io/github/v/release/taosmountain/docker-atlantis-found?sort=semver" /></a>
+  <a href="https://github.com/orgs/taosmountain/packages/container/package/atlantis-found" alt="Docker images">
+    <img src="https://img.shields.io/badge/docker-ghcr-blue" /></a>
+  <a href="https://github.com/taosmountain/docker-atlantis-found/actions?query=workflow%3ADocker" alt="Docker release workflow">
+    <img src="https://img.shields.io/github/workflow/status/taosmountain/docker-atlantis-found/Docker" /></a>
   <a href="https://github.com/taosmountain/docker-atlantis-found/issues" alt="Issues">
-    <img src="https://img.shields.io/github/issues/taosmountain/docker-atlantis-found.svg" /></a>
+    <img src="https://img.shields.io/github/issues/taosmountain/docker-atlantis-found" /></a>
   <a href="https://github.com/taosmountain/docker-atlantis-found/pulls" alt="Pull requests">
-    <img src="https://img.shields.io/github/issues-pr/taosmountain/docker-atlantis-found.svg" /></a>
-  <a href="https://github.com/taosmountain/docker-atlantis-found/pulls" alt="License">
-    <img src="https://img.shields.io/badge/license-GNU3.0-blue.svg" /></a>
-    
-  <!--[![Status](https://img.shields.io/badge/status-active-success.svg)]()-->
+    <img src="https://img.shields.io/github/issues-pr/taosmountain/docker-atlantis-found" /></a>
+  <a href="https://github.com/taosmountain/docker-atlantis-found/master/" alt="License">
+    <img src="https://img.shields.io/badge/license-GNU3.0-blue" /></a>
 
 </p>
 
