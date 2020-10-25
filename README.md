@@ -131,7 +131,7 @@ If forking this repo, you'll want to customize the `Makefile` to deploy to your 
 
 <!-- TODO: once open-source, add sourcerer hall of fame https://sourcerer.io/settings#hof -->
 
-*This project stands on the shoulders of giants:*
+*This project stands on the shoulders of giants. Thanks to:*
 
 - [hashicorp] for terraform
 - [gruntwork] for terragrunt
