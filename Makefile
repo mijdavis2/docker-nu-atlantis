@@ -1,4 +1,4 @@
-﻿GIT_TAG = atlantis:$(shell git describe --tags HEAD)
+﻿GIT_TAG = atlantis-found:$(shell git describe --tags HEAD)
 TAG ?= $(GIT_TAG)
 # TODO: Add registry
 REGISTRY = '___'
