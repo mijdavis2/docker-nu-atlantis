@@ -1,4 +1,4 @@
-name: Docker
+name: docker-publish
 on:
   release:
     types: [published]
@@ -10,21 +10,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: make test-all
+        run: make test
+
   push_to_registry:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      - name: Build latest image
+        run: TAG=githubci make build
+
+      - name: Build tf12 image
+        run: TAG=githubci make build-tf12
 
       - name: Log into GitHub Container Registry
-        # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
         run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Push image to GitHub Container Registry
+      - name: Push images to GitHub Container Registry
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
 
@@ -45,3 +48,9 @@ jobs:
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+          docker push $IMAGE_ID:latest
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
+
+          docker tag $IMAGE_NAME:tf12 $IMAGE_ID:tf12-$VERSION
+          docker push $IMAGE_ID:tf12-$VERSION

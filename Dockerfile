@@ -7,10 +7,11 @@ ci/cd docker image with refreshingly clean output."
 
 RUN apk update && apk upgrade
 
-ENV TERRAFORM_VERSION=0.12.29 \
-    TERRAGRUNT_VERSION=v0.24.4 \
-    TFMASK_VERSION=0.7.0 \
-    INSTALL_DIR=/usr/local/bin
+ENV INSTALL_DIR=/usr/local/bin
+
+ARG TERRAFORM_VERSION=0.13.5
+ARG TERRAGRUNT_VERSION=v0.25.5
+ARG TFMASK_VERSION=0.7.0
 
 RUN rm -rf ${INSTALL_DIR}/terraform && \
     curl -s -Lo terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
