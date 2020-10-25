@@ -1,18 +1,23 @@
-<!-- <p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p> -->
+<p align="center">
+  <a href="https://www.taos.com/">
+    <img width=100px height=100px src="https://miro.medium.com/fit/c/262/262/0*okNzl1Zgc5ufyVwS.jpg" alt="Taos logo">
+  </a>
+</p>
 
-<h3 align="center">Atlantis Found</h3>
+<h3 align="center">atlantis-found</h3>
 
-<!-- <div align="center">
+<p align="center">
+  
+  <a href="https://github.com/taosmountain/docker-atlantis-found/issues" alt="Issues">
+    <img src="https://img.shields.io/github/issues/taosmountain/docker-atlantis-found.svg" /></a>
+  <a href="https://github.com/taosmountain/docker-atlantis-found/pulls" alt="Pull requests">
+    <img src="https://img.shields.io/github/issues-pr/taosmountain/docker-atlantis-found.svg" /></a>
+  <a href="https://github.com/taosmountain/docker-atlantis-found/pulls" alt="License">
+    <img src="https://img.shields.io/badge/license-GNU3.0-blue.svg" /></a>
+    
+  <!--[![Status](https://img.shields.io/badge/status-active-success.svg)]()-->
 
-  [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-  [![GitHub Issues](https://img.shields.io/github/issues/###/template-standard.svg)](https://github.com/###/template-standard/issues)
-  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/###/template-standard.svg)](https://github.com/###/template-standard/pulls)
-  [![License](https://img.shields.io/badge/license-GNU3.0-blue.svg)](/LICENSE)
-
-</div> -->
+</p>
 
 ---
 
