@@ -18,8 +18,8 @@
     <img src="https://img.shields.io/github/issues/taosmountain/docker-atlantis-found" /></a>
   <a href="https://github.com/taosmountain/docker-atlantis-found/pulls" alt="Pull requests">
     <img src="https://img.shields.io/github/issues-pr/taosmountain/docker-atlantis-found" /></a>
-  <a href="https://github.com/taosmountain/docker-atlantis-found/master/" alt="License">
-    <img src="https://img.shields.io/badge/license-GNU3.0-blue" /></a>
+  <a href="https://github.com/taosmountain/docker-atlantis-found/blob/master/LICENSE" alt="License">
+    <img src="https://img.shields.io/github/license/taosmountain/docker-atlantis-found" /></a>
 
 </p>
 
@@ -50,10 +50,11 @@
 
 # About
 
-While terraform is an excellent tool for infrastructure-as-code,
-keeping terraform DRY, automating deployment through gitflow and ci tools,
+Terraform is an excellent tool for deploying infrastructure-as-code.
+However, keeping terraform DRY, automating deployment through gitflow and ci tools,
 and doing it all without leaking secrets takes a bit of extra tooling.
-With this docker image and adopting [terragrunt], you get all of the above. Also see [why use terragrunt].
+With [our docker image](https://github.com/orgs/taosmountain/packages/container/package/atlantis-found) and by adopting [terragrunt],
+you get all of the above with minimal overhead. Also see [why use terragrunt].
 
 ## The tool stack
 
@@ -123,5 +124,5 @@ If forking this repo, you'll want to customize the `Makefile` to deploy to your 
 [why use terragrunt]: https://transcend.io/blog/why-we-use-terragrunt
 [atlantis]: https://www.runatlantis.io/
 [tfmask]: https://github.com/cloudposse/tfmask
-[packages]: https://github.com/###
+[packages]: https://github.com/orgs/taosmountain/packages/container/package/atlantis-found
 [atlantis-found]: ./README.md
