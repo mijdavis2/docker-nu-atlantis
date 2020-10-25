@@ -37,7 +37,7 @@
 - [Usage](#usage)
 - [Compatibility](#compatibility)
 - [Contributing](#contributing)
-- [Thanks](#thanks)
+- [Special Thanks](#special-thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

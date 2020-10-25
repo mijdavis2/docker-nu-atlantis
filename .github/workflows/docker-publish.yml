@@ -3,7 +3,7 @@ on:
   release:
     types: [published]
 env:
-  IMAGE_NAME: atlantis-found
+  BUILD_TAG: ci
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,38 +19,24 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build latest image
-        run: TAG=githubci make build
+        run: TAG=$BUILD_TAG make build
 
       - name: Build tf12 image
-        run: TAG=githubci make build-tf12
+        run: TAG=$BUILD_TAG make build-tf12
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push images to GitHub Container Registry
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
-
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
-          echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
-
-          docker push $IMAGE_ID:latest
-          docker tag $IMAGE_NAME $IMAGE_ID:latest
-
-          docker tag $IMAGE_NAME:tf12 $IMAGE_ID:tf12-$VERSION
-          docker push $IMAGE_ID:tf12-$VERSION
+          make publish
+          TAG=latest make publish
+          make publish-12
