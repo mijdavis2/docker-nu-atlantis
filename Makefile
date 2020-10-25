@@ -1,7 +1,7 @@
 ﻿IMAGE_NAME = atlantis-found
 GIT_TAG = $(shell git describe --tags HEAD)
 TAG ?= $(GIT_TAG)
-REGISTRY = 'ghcr.io/taosmountain/atlantis-found'
+REGISTRY = ghcr.io/taosmountain
 DOCKER_REGISTRY ?= $(REGISTRY)
 IMAGE_ID = $(DOCKER_REGISTRY)/$(IMAGE_NAME)
 
@@ -12,12 +12,12 @@ build:
 
 publish: build
 	docker push $(IMAGE_ID):$(TAG)
-	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_NAME):tf13-$(TAG)
-	docker push $(IMAGE_NAME):tf13-$(TAG)
+	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):tf13-$(TAG)
+	docker push $(IMAGE_ID):tf13-$(TAG)
 
 # For Terraform 0.12
 build-tf12:
-	docker build -t $(IMAGE_NAME):tf12-$(TAG) \
+	docker build -t $(IMAGE_ID):tf12-$(TAG) \
 		--build-arg TERRAFORM_VERSION=0.12.29 \
 		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
 		./
