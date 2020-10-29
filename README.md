@@ -1,8 +1,8 @@
-<!-- <p align="center">
+<p align="center">
   <a href="https://www.taos.com/">
     <img width=100px height=100px src="https://miro.medium.com/fit/c/262/262/0*okNzl1Zgc5ufyVwS.jpg" alt="Taos logo">
   </a>
-</p> -->
+</p>
 
 <h1>atlantis-found</h1>
 
