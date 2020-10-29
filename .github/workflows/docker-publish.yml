@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: make test
+        run: make test-all
 
   push_to_registry:
     needs: test
@@ -21,8 +21,14 @@ jobs:
       - name: Build latest image
         run: TAG=$BUILD_TAG make build
 
+      - name: Build latest base image
+        run: TAG=$BUILD_TAG make build-base
+
       - name: Build tf12 image
         run: TAG=$BUILD_TAG make build-tf12
+
+      - name: Build tf12 base image
+        run: TAG=$BUILD_TAG make build-tf12-base
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
@@ -37,5 +43,7 @@ jobs:
 
           echo VERSION=$VERSION
 
+          make publish-tf12-base
           make publish-tf12
+          make publish-base
           make publish

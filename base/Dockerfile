@@ -7,13 +7,13 @@ ci/cd docker image with refreshingly clean output."
 
 RUN apk update && apk upgrade
 
-ENV INSTALL_DIR=/usr/local/bin
-
+ENV INSTALL_DIR=/opt/af
 ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=v0.25.5
 ARG TFMASK_VERSION=0.7.0
 
-RUN rm -rf ${INSTALL_DIR}/terraform && \
+RUN mkdir -p ${INSTALL_DIR}
+RUN rm -rf /usr/local/bin/terraform && \
     curl -s -Lo terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     unzip terraform.zip && \
     rm -rf terraform.zip && \
@@ -31,13 +31,14 @@ RUN curl -s -Lo tfmask https://github.com/cloudposse/tfmask/releases/download/${
     mv tfmask ${INSTALL_DIR}/ && \
     chown atlantis:atlantis ${INSTALL_DIR}/tfmask
 
-ENV ATLANTIS_HIDE_PREV_PLAN_COMMENTS=true \
+USER atlantis
+ENV INSTALL_DIR=/opt/af \
+    PATH=${PATH}:${INSTALL_DIR} \
+    ATLANTIS_HIDE_PREV_PLAN_COMMENTS=true \
     ATLANTIS_WRITE_GIT_CREDS=true \
     ATLANTIS_AUTOMERGE=true \
     TF_CLI_ARGS="-no-color" \
     WORKDIR=/home/atlantis
-
-RUN mkdir -p ${WORKDIR}
 WORKDIR ${WORKDIR}
 
 COPY files/ ${WORKDIR}

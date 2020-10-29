@@ -8,7 +8,7 @@ IMAGE_ID = $(DOCKER_REGISTRY)/$(IMAGE_NAME)
 ########
 # Docker
 build:
-	docker build -t $(IMAGE_ID):$(TAG) ./
+	docker build -f ./full/Dockerfile -t $(IMAGE_ID):$(TAG) ./full/
 
 publish: build
 	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):tf13-$(TAG)
@@ -17,29 +17,62 @@ publish: build
 	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):latest
 	docker push $(IMAGE_ID):latest
 
+build-base:
+	docker build -f ./base/Dockerfile -t $(IMAGE_ID):base-$(TAG) ./base/
+
+publish-base: build
+	docker tag $(IMAGE_ID):base-$(TAG) $(IMAGE_ID):tf13-base-$(TAG)
+	docker push $(IMAGE_ID):tf13-base-$(TAG)
+	docker push $(IMAGE_ID):base-$(TAG)
+
 # For Terraform 0.12
 build-tf12:
-	docker build -t $(IMAGE_ID):tf12-$(TAG) \
+	docker build -f ./full/Dockerfile -t $(IMAGE_ID):tf12-$(TAG) \
 		--build-arg TERRAFORM_VERSION=0.12.29 \
 		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
-		./
+		./full/
 
 publish-tf12: build-tf12
 	docker push $(IMAGE_ID):tf12-$(TAG)
 
+build-tf12-base:
+	docker build -f ./full/Dockerfile -t $(IMAGE_ID):tf12-base-$(TAG) \
+		--build-arg TERRAFORM_VERSION=0.12.29 \
+		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
+		./base/
+
+publish-tf12-base: build-tf12-base
+	docker push $(IMAGE_ID):tf12-base-$(TAG)
+
 #########
 # Testing
 test-terraform:
-	docker run --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -l -c "terraform --version"
+	docker run --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terraform --version"
 
 test-terragrunt:
-	docker run --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -l -c "terragrunt --version"
+	docker run --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terragrunt --version"
 
 test-tfmask:
-	docker run --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -l -c "type tfmask"
+	docker run --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type tfmask"
 
-test: build test-terraform test-terragrunt test-tfmask
+test-credstash:
+	docker run --rm --name atlantis-test-credstash --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type credstash"
 
+test: build test-terraform test-terragrunt test-tfmask test-credstash
+
+# Base image testing
+test-terraform-base:
+	docker run --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terraform --version"
+
+test-terragrunt-base:
+	docker run --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terragrunt --version"
+
+test-tfmask-base:
+	docker run --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "type tfmask"
+
+test-base: build-base test-terraform-base test-terragrunt-base test-tfmask-base
+
+test-all: test-base test
 ###############
 # Documentation
 update-changelog:
