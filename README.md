@@ -66,6 +66,10 @@ Follow instructions for [atlantis] but use this image.
 
 See [our GitHub Container Registry](https://github.com/orgs/taosmountain/packages/container/package/atlantis-found) for available image tags.
 
+There are two images to choose from: `full` and `base`.
+
+- **full**: This is the default image. Includes additional tooling and 3rd party providers, e.g. [credstash](https://github.com/fugue/credstash)
+- **base**: Includes only the base tool-set.
 
 
 ## Compatibility
