@@ -20,7 +20,7 @@ publish: build
 build-base:
 	docker build -f ./base/Dockerfile -t $(IMAGE_ID):base-$(TAG) ./base/
 
-publish-base: build
+publish-base: build-base
 	docker tag $(IMAGE_ID):base-$(TAG) $(IMAGE_ID):tf13-base-$(TAG)
 	docker push $(IMAGE_ID):tf13-base-$(TAG)
 	docker push $(IMAGE_ID):base-$(TAG)
