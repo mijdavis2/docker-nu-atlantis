@@ -7,7 +7,7 @@ ci/cd docker image with refreshingly clean output."
 
 RUN apk update && apk upgrade
 
-ENV INSTALL_DIR=/opt/af
+ENV INSTALL_DIR=/opt/nu-atlantis
 ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=v0.25.5
 ARG TFMASK_VERSION=0.7.0
@@ -32,7 +32,7 @@ RUN curl -s -Lo tfmask https://github.com/cloudposse/tfmask/releases/download/${
     chown atlantis:atlantis ${INSTALL_DIR}/tfmask
 
 USER atlantis
-ENV INSTALL_DIR=/opt/af \
+ENV INSTALL_DIR=/opt/nu-atlantis \
     PATH=${PATH}:${INSTALL_DIR} \
     ATLANTIS_HIDE_PREV_PLAN_COMMENTS=true \
     ATLANTIS_WRITE_GIT_CREDS=true \
