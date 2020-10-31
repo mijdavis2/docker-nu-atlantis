@@ -32,7 +32,7 @@ RUN apk del     \
     openssl-dev \
     python3-dev
 
-ENV INSTALL_DIR=/opt/af
+ENV INSTALL_DIR=/opt/nu-atlantis
 ENV PATH=${PATH}:${INSTALL_DIR}
 ENV PATH=${PATH}:${INSTALL_DIR}/bin
 ARG TERRAFORM_VERSION=0.13.5
@@ -68,7 +68,7 @@ RUN curl -s -Lo tfmask https://github.com/cloudposse/tfmask/releases/download/${
 # Multistage use here squeezes about 20% out of the original build image
 FROM runatlantis/atlantis:v0.15.0
 
-ENV INSTALL_DIR=/opt/af \
+ENV INSTALL_DIR=/opt/nu-atlantis \
     TF_PLUGIN_DIR=/home/atlantis/.terraform.d/plugins
 ARG CREDSTASH_PROVIDER_VERSION=v0.5.0
 
