@@ -7,8 +7,13 @@ IMAGE_ID = $(DOCKER_REGISTRY)/$(IMAGE_NAME)
 
 ########
 # Docker
+pull:
+	docker pull $(IMAGE_ID):latest
+	docker tag $(IMAGE_ID):latest $(IMAGE_NAME)
+
 build:
 	docker build -f ./full/Dockerfile -t $(IMAGE_ID):$(TAG) ./full/
+	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_NAME)
 
 publish: build
 	docker tag $(IMAGE_ID):$(TAG) $(IMAGE_ID):tf13-$(TAG)
@@ -73,6 +78,7 @@ test-tfmask-base:
 test-base: build-base test-terraform-base test-terragrunt-base test-tfmask-base
 
 test-all: test-base test
+
 ###############
 # Documentation
 update-changelog:

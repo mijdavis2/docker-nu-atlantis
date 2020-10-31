@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: make test-all
+        run: |
+          make pull
+          make test-all
 
   push_to_registry:
     needs: test
@@ -19,7 +21,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build latest image
-        run: TAG=$BUILD_TAG make build
+        run: |
+          make pull
+          TAG=$BUILD_TAG make build
 
       - name: Build latest base image
         run: TAG=$BUILD_TAG make build-base
