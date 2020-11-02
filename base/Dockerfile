@@ -37,6 +37,7 @@ ENV INSTALL_DIR=/opt/nu-atlantis \
     ATLANTIS_HIDE_PREV_PLAN_COMMENTS=true \
     ATLANTIS_WRITE_GIT_CREDS=true \
     ATLANTIS_AUTOMERGE=true \
+    TFMASK_VALUES_REGEX="(?i)^.*[^a-zA-Z](oauth|secret|token|password|key|result).*$" \
     TF_CLI_ARGS="-no-color" \
     WORKDIR=/home/atlantis
 WORKDIR ${WORKDIR}
