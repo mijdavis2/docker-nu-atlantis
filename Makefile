@@ -34,7 +34,7 @@ publish-base: build-base
 build-tf12:
 	docker build -f ./full/Dockerfile -t $(IMAGE_ID):tf12-$(TAG) \
 		--build-arg TERRAFORM_VERSION=0.12.29 \
-		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
+		--build-arg TERRAGRUNT_VERSION=0.24.4 \
 		./full/
 
 publish-tf12: build-tf12
@@ -43,7 +43,7 @@ publish-tf12: build-tf12
 build-tf12-base:
 	docker build -f ./full/Dockerfile -t $(IMAGE_ID):tf12-base-$(TAG) \
 		--build-arg TERRAFORM_VERSION=0.12.29 \
-		--build-arg TERRAGRUNT_VERSION=v0.24.4 \
+		--build-arg TERRAGRUNT_VERSION=0.24.4 \
 		./base/
 
 publish-tf12-base: build-tf12-base

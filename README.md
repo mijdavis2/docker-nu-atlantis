@@ -53,6 +53,8 @@ you get all of the above with minimal overhead. Also see [why use terragrunt].
 
 - **[terragrunt]** is a terraform wrapper that helps keep code DRY, maintainable, and safe to automate. See [why use terragrunt].
 - **[atlantis]** is a terraform ci/cd tool that makes automating terraform via good git practices easy. No need for jenkins and you can deploy it anywhere.
+- **[tfenv]** is a version manager for terraform making it easy to set, install and use multiple versions of terraform in a single config repo.
+- **[tgenv]** is a similar version manager for terragrunt.
 - **[tfmask]** keeps ci/cd of terraform secure by filtering passwords and secrets in terraform output from plans and applies.
 - **[nu-atlantis]** custom atlantis image with bash wrappers for everything above and some enhancements:
   - sets opinionated atlantis config defaults so you don't need atlantis config in your tf repo.
@@ -77,6 +79,11 @@ There are two images to choose from: `full` and `base`.
 While atlantis supports any terraform version at runtime,
 this image uses explicit terraform and terragrunt versions
 to ensure compatibility.
+
+To override the terraform or terragrunt version in a hybrid scenario,
+see documentation for [tfenv] and [tgenv] respectively.
+Using `.terraform-version` and `.terragrunt-version` files will ensure
+the appropriate versions of each are installed and used where desired.
 
 #### Terraform 0.13
 
@@ -140,6 +147,8 @@ If forking this repo, you'll want to customize the `Makefile` to deploy to your 
 - [hashicorp] for terraform
 - [gruntwork] for terragrunt
 - [runatlantis team] for atlantis
+- [tfutils] for tfenv
+- [cunymatthieu] for tgenv
 - [cloudposse] for tfmask
 - [thlorenz] for doctoc
 
@@ -148,11 +157,15 @@ If forking this repo, you'll want to customize the `Makefile` to deploy to your 
 [terragrunt]: https://terragrunt.gruntwork.io/
 [why use terragrunt]: https://transcend.io/blog/why-we-use-terragrunt
 [atlantis]: https://www.runatlantis.io/
+[tfenv]: https://github.com/tfutils/tfenv
+[tgenv]: https://github.com/cunymatthieu/tgenv
 [tfmask]: https://github.com/cloudposse/tfmask
 [nu-atlantis]: ./README.md
 [hashicorp]: https://www.hashicorp.com/
 [gruntwork]: https://gruntwork.io/
 [runatlantis team]: https://github.com/runatlantis
+[tfutils]: https://github.com/tfutils
+[cunymatthieu]: https://github.com/cunymatthieu
 [cloudposse]: https://github.com/cloudposse/tfmask
 [thlorenz]: https://github.com/thlorenz/doctoc
 [hoppalotta]: https://github.com/hoppalotta
