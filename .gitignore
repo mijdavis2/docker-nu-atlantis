@@ -4,6 +4,7 @@
 temp/
 .tmp/
 tmp/
+*.log
 
 # Compiled code
 build/
