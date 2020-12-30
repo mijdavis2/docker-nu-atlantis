@@ -13,7 +13,7 @@ ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=0.25.5
 ARG TFMASK_VERSION=0.7.0
 ARG TFENV_VERSION=v2.0.0
-ARG TGENV_VERSION=v0.0.3
+ARG TGENV_VERSION=0.1.0
 
 # Remove atlantis default terraform binary to ensure no conflicts
 RUN rm -rf /usr/local/bin/terraform
@@ -23,7 +23,7 @@ RUN git clone -b ${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR
 RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin
 RUN tfenv install ${TERRAFORM_VERSION}; tfenv use ${TERRAFORM_VERSION}
 
-RUN git clone -b ${TGENV_VERSION} https://github.com/cunymatthieu/tgenv.git ${WORKDIR}/.tgenv
+RUN git clone -b ${TGENV_VERSION} https://github.com/taosmountain/tgenv.git ${WORKDIR}/.tgenv
 RUN ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin
 RUN tgenv install ${TERRAGRUNT_VERSION}; tgenv use ${TERRAGRUNT_VERSION}
 
