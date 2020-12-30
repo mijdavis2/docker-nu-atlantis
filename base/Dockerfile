@@ -12,14 +12,14 @@ ENV WORKDIR=/home/atlantis
 ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=0.25.5
 ARG TFMASK_VERSION=0.7.0
-ARG TFENV_VERSION=v2.0.0
+ARG TFENV_VERSION=2.0.0
 ARG TGENV_VERSION=0.1.0
 
 # Remove atlantis default terraform binary to ensure no conflicts
 RUN rm -rf /usr/local/bin/terraform
 
 WORKDIR ${WORKDIR}
-RUN git clone -b ${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv
+RUN git clone -b v${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv
 RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin
 RUN tfenv install ${TERRAFORM_VERSION}; tfenv use ${TERRAFORM_VERSION}
 

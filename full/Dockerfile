@@ -39,15 +39,15 @@ ENV PATH=${PATH}:${INSTALL_DIR}/bin
 ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=0.25.5
 ARG TFMASK_VERSION=0.7.0
-ARG TFENV_VERSION=v2.0.0
+ARG TFENV_VERSION=2.0.0
 ARG TGENV_VERSION=0.1.0
-ARG CREDSTASH_PROVIDER_VERSION=v0.5.0
+ARG CREDSTASH_PROVIDER_VERSION=0.5.0
 
 # Remove atlantis default terraform binary to ensure no conflicts
 RUN rm -rf /usr/local/bin/terraform
 
 WORKDIR ${WORKDIR}
-RUN git clone -b ${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv
+RUN git clone -b v${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv
 RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin
 RUN tfenv install ${TERRAFORM_VERSION}; tfenv use ${TERRAFORM_VERSION}
 
@@ -56,11 +56,11 @@ RUN ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin
 RUN tgenv install ${TERRAGRUNT_VERSION}; tgenv use ${TERRAGRUNT_VERSION}
 
 RUN mkdir -p ${INSTALL_DIR}
-RUN curl -s -Lo terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION} https://github.com/sspinc/terraform-provider-credstash/releases/download/${CREDSTASH_PROVIDER_VERSION}/terraform-provider-credstash_linux_amd64 && \
-    chmod +x terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION} && \
+RUN curl -s -Lo terraform-provider-credstash_v${CREDSTASH_PROVIDER_VERSION} https://github.com/sspinc/terraform-provider-credstash/releases/download/v${CREDSTASH_PROVIDER_VERSION}/terraform-provider-credstash_linux_amd64 && \
+    chmod +x terraform-provider-credstash_v${CREDSTASH_PROVIDER_VERSION} && \
     mkdir -p /home/atlantis/.terraform.d/plugins/ && \
-    mv terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION} /home/atlantis/.terraform.d/plugins/ && \
-    chown atlantis:atlantis /home/atlantis/.terraform.d/plugins/terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION}
+    mv terraform-provider-credstash_v${CREDSTASH_PROVIDER_VERSION} /home/atlantis/.terraform.d/plugins/ && \
+    chown atlantis:atlantis /home/atlantis/.terraform.d/plugins/terraform-provider-credstash_v${CREDSTASH_PROVIDER_VERSION}
 
 RUN curl -s -Lo tfmask https://github.com/cloudposse/tfmask/releases/download/${TFMASK_VERSION}/tfmask_linux_amd64 && \
     chmod +x tfmask && \
