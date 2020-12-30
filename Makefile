@@ -52,30 +52,48 @@ publish-tf12-base: build-tf12-base
 #########
 # Testing
 test-terraform:
-	docker run --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terraform --version"
+	docker run -u atlantis --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terraform --version"
 
 test-terragrunt:
-	docker run --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terragrunt --version"
+	docker run -u atlantis --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "terragrunt --version"
+
+test-tfenv:
+	docker run -u atlantis --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "tfenv list"
+
+test-tgenv:
+	docker run -u atlantis --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "tgenv list"
+
+test-tfenv:
+	docker run -u atlantis --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "tfenv install 0.14.1"
+
+test-tgenv:
+	docker run -u atlantis --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "tgenv install 0.26.6"
 
 test-tfmask:
-	docker run --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type tfmask"
+	docker run -u atlantis --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type tfmask"
 
 test-credstash:
-	docker run --rm --name atlantis-test-credstash --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type credstash"
+	docker run -u atlantis --rm --name atlantis-test-credstash --entrypoint /bin/bash $(IMAGE_ID):$(TAG) -c "type credstash"
 
-test: build test-terraform test-terragrunt test-tfmask test-credstash
+test: build test-terraform test-terragrunt test-tfenv test-tgenv test-tfmask test-credstash
 
 # Base image testing
 test-terraform-base:
-	docker run --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terraform --version"
+	docker run -u atlantis --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terraform --version"
 
 test-terragrunt-base:
-	docker run --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terragrunt --version"
+	docker run -u atlantis --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "terragrunt --version"
+
+test-tfenv-base:
+	docker run -u atlantis --rm --name atlantis-test-tf --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "tfenv install 0.14.1"
+
+test-tgenv-base:
+	docker run -u atlantis --rm --name atlantis-test-tg --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "tgenv install 0.26.6"
 
 test-tfmask-base:
-	docker run --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "type tfmask"
+	docker run -u atlantis --rm --name atlantis-test-tfmask --entrypoint /bin/bash $(IMAGE_ID):base-$(TAG) -c "type tfmask"
 
-test-base: build-base test-terraform-base test-terragrunt-base test-tfmask-base
+test-base: build-base test-terraform-base test-terragrunt-base test-tfenv-base test-tgenv-base test-tfmask-base
 
 test-all: test-base test
 

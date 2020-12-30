@@ -43,17 +43,20 @@ ARG TFENV_VERSION=2.0.0
 ARG TGENV_VERSION=0.1.0
 ARG CREDSTASH_PROVIDER_VERSION=0.5.0
 
-# Remove atlantis default terraform binary to ensure no conflicts
+WORKDIR ${WORKDIR}
+
+# Remove preinstalled atlantis terraform binary to ensure no conflicts
 RUN rm -rf /usr/local/bin/terraform
 
-WORKDIR ${WORKDIR}
-RUN git clone -b v${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv
-RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin
-RUN tfenv install ${TERRAFORM_VERSION}; tfenv use ${TERRAFORM_VERSION}
+RUN git clone -b v${TFENV_VERSION} https://github.com/tfutils/tfenv.git ${WORKDIR}/.tfenv && \
+    ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin && \
+    tfenv install ${TERRAFORM_VERSION} && \
+    tfenv use ${TERRAFORM_VERSION}
 
-RUN git clone -b ${TGENV_VERSION} https://github.com/taosmountain/tgenv.git ${WORKDIR}/.tgenv
-RUN ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin
-RUN tgenv install ${TERRAGRUNT_VERSION}; tgenv use ${TERRAGRUNT_VERSION}
+RUN git clone -b ${TGENV_VERSION} https://github.com/taosmountain/tgenv.git ${WORKDIR}/.tgenv && \
+    ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin && \
+    tgenv install ${TERRAGRUNT_VERSION} && \
+    tgenv use ${TERRAGRUNT_VERSION}
 
 RUN mkdir -p ${INSTALL_DIR}
 RUN curl -s -Lo terraform-provider-credstash_v${CREDSTASH_PROVIDER_VERSION} https://github.com/sspinc/terraform-provider-credstash/releases/download/v${CREDSTASH_PROVIDER_VERSION}/terraform-provider-credstash_linux_amd64 && \
@@ -77,6 +80,8 @@ ARG TERRAFORM_VERSION=0.13.5
 ARG TERRAGRUNT_VERSION=0.25.5
 ARG CREDSTASH_PROVIDER_VERSION=v0.5.0
 
+WORKDIR ${WORKDIR}
+
 RUN apk update && apk upgrade
 RUN apk add 'python3<3.9' cmd:pip3 && \
     mkdir -p ${INSTALL_DIR} && \
@@ -89,10 +94,9 @@ COPY --from=builder ${WORKDIR}/.tgenv ${WORKDIR}/.tgenv
 COPY --from=builder /home/atlantis/.local /home/atlantis/.local
 COPY --from=builder ${TF_PLUGIN_DIR}/terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION} ${TF_PLUGIN_DIR}/terraform-provider-credstash_${CREDSTASH_PROVIDER_VERSION}
 
-RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin; tfenv use ${TERRAFORM_VERSION}
-RUN ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin; tgenv use ${TERRAGRUNT_VERSION}
+RUN ln -s ${WORKDIR}/.tfenv/bin/* /usr/local/bin; tfenv use ${TERRAFORM_VERSION} && \
+    ln -s ${WORKDIR}/.tgenv/bin/* /usr/local/bin; tgenv use ${TERRAGRUNT_VERSION}
 
-USER atlantis
 ENV PATH=${PATH}:${INSTALL_DIR}:/home/atlantis/.local/bin \
     ATLANTIS_HIDE_PREV_PLAN_COMMENTS=true \
     ATLANTIS_WRITE_GIT_CREDS=true \
@@ -100,7 +104,7 @@ ENV PATH=${PATH}:${INSTALL_DIR}:/home/atlantis/.local/bin \
     TFMASK_VALUES_REGEX="(?i)^.*[^a-zA-Z](oauth|secret|token|password|key|result).*$" \
     TF_CLI_ARGS="-no-color"
 
-WORKDIR ${WORKDIR}
-
 COPY files/ ${WORKDIR}
+RUN chown -R atlantis:atlantis ${WORKDIR}
+USER atlantis
 CMD ["atlantis", "server", "--repo-config", "repos.yaml"]
