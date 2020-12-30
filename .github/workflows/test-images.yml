@@ -1,6 +1,9 @@
-﻿name: pr-test
+﻿name: test-images
 on:
   pull_request:
+  push:
+    branches:
+    - master
 jobs:
   test:
     runs-on: ubuntu-latest
