@@ -1,4 +1,4 @@
-FROM runatlantis/atlantis:v0.15.0
+FROM runatlantis/atlantis:v0.16.1
 
 LABEL authors="Michael J. Davis"
 LABEL description="Combines the benefits of atlantis, \

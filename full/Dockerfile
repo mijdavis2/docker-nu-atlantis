@@ -1,4 +1,4 @@
-FROM runatlantis/atlantis:v0.15.0 as builder
+FROM runatlantis/atlantis:v0.16.1 as builder
 
 LABEL authors="Michael J. Davis"
 LABEL description="Combines the benefits of atlantis, \
@@ -71,7 +71,7 @@ RUN curl -s -Lo tfmask https://github.com/cloudposse/tfmask/releases/download/${
     chown atlantis:atlantis ${INSTALL_DIR}/tfmask
 
 # Multistage use here squeezes about 20% out of the original build image
-FROM runatlantis/atlantis:v0.15.0
+FROM runatlantis/atlantis:v0.16.1
 
 ENV INSTALL_DIR=/opt/nu-atlantis \
     TF_PLUGIN_DIR=/home/atlantis/.terraform.d/plugins \
