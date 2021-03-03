@@ -13,7 +13,8 @@ RUN apk add    \
     gcc        \
     libffi-dev \
     musl-dev   \
-    openssl-dev
+    openssl-dev \
+    cargo
 
 # Install credstash and ldap3 for local-exec
 RUN apk add 'python3<3.9' python3-dev cmd:pip3
