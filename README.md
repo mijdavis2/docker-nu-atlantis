@@ -65,6 +65,9 @@ you get all of the above with minimal overhead. Also see [why use terragrunt].
 ## Usage
 
 Follow instructions for [atlantis] but use this image.
+See especially the [server-side config](https://www.runatlantis.io/docs/server-configuration.html) for setting env vars when deploying our image.
+
+> There is an official [terraform module](https://github.com/terraform-aws-modules/terraform-aws-atlantis) for deploying to AWS Fargate as well.
 
 See [our GitHub Container Registry](https://github.com/orgs/taosmountain/packages/container/package/nu-atlantis) for available image tags.
 
@@ -73,6 +76,7 @@ There are two images to choose from: `full` and `base`.
 - **full**: This is the default image. Includes additional tooling and 3rd party providers, e.g. [credstash](https://github.com/fugue/credstash)
 - **base**: Includes only the base tool-set.
 
+**Before using Atlantis and the code in this repository please make sure that you have read and understood the security implications described in the [official Atlantis documentation](https://www.runatlantis.io/docs/security.html).**
 
 ## Compatibility
 
@@ -155,6 +159,7 @@ If forking this repo, you'll want to customize the `Makefile` to deploy to your 
 [contributing guidelines]: ./.github/CONTRIBUTING.md
 [terragrunt]: https://terragrunt.gruntwork.io/
 [why use terragrunt]: https://transcend.io/blog/why-we-use-terragrunt
+[atlantis]: https://www.runatlantis.io/
 [atlantis]: https://www.runatlantis.io/
 [tfenv]: https://github.com/tfutils/tfenv
 [tgenv]: https://github.com/taosmountain/tgenv
