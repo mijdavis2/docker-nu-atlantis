@@ -1,4 +1,4 @@
-﻿name: test-images
+name: test-images
 on:
   pull_request:
   push:

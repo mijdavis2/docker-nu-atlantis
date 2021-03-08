@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 #
 # Perform terragrunt 'apply' with secure and terse output.
 
