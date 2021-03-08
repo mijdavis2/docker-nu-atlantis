@@ -1,4 +1,4 @@
-﻿IMAGE_NAME = nu-atlantis
+IMAGE_NAME = nu-atlantis
 GIT_TAG = $(shell git describe --tags HEAD)
 TAG ?= $(GIT_TAG)
 REGISTRY = ghcr.io/taosmountain
